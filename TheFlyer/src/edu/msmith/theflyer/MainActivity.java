@@ -1,5 +1,5 @@
 //sherdon brown
-// Marcus Smith
+// Marcus Smith rules 
 package edu.msmith.theflyer;
 
 import android.os.Bundle;
