@@ -1,4 +1,5 @@
-//sherdon brown 
+//sherdon brown
+// Marcus Smith
 package edu.msmith.theflyer;
 
 import android.os.Bundle;
