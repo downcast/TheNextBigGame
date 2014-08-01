@@ -1,6 +1,5 @@
 //sherdon brown
 // Marcus Smith rules 
-// Kratos
 package edu.msmith.theflyer;
 
 import android.os.Bundle;
@@ -40,3 +39,4 @@ public class MainActivity extends Activity implements Runnable{
 }
 
 //Sherdon Brown
+//game app flyer
