@@ -1,5 +1,6 @@
 //sherdon brown
 // Marcus Smith rules 
+// Kratos
 package edu.msmith.theflyer;
 
 import android.os.Bundle;
