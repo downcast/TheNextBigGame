@@ -3,16 +3,16 @@ package edu.msmith.theflyer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.widget.TextView;
 
+// Here is the most basic skeleton for a moving image I could make. 
+// The news Helicopter moves diagonally towards the bottom right side of the screen
 public class MainActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		TextView text= (TextView) findViewById(R.id.text);
+		// This is going to link our custom canvas with the mainAcitivty one.
+		setContentView(new TestClass1(this));
 	}
 
 	@Override
