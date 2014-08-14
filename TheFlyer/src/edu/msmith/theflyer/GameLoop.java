@@ -2,6 +2,7 @@ package edu.msmith.theflyer;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -31,7 +32,7 @@ public class GameLoop extends Thread implements Runnable{
 			// Left a link on trello explain what this does. Basically, it keep multiple threads from using this specific set of code
 			synchronized(this.surfaceHolder){
 				// This clears the screen by drawing the background color
-				canvas.drawColor(Color.BLACK);
+				canvas.drawColor(Color.BLUE);
 				// This ultimately makes its way down to the GameImage obj who actually draws the heli
 				this.testClass.render(canvas);
 				// This is what unlocks the canvas and outputs what we drew to the user.

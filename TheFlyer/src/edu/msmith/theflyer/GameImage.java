@@ -23,7 +23,7 @@ public class GameImage {
 
     /* Method to draw images on Canvas */
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,move, null);
+        canvas.drawBitmap(bitmap, move,5, null);
         move+=5;
     }
 }
