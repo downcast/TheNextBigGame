@@ -10,7 +10,7 @@ public class GameImage {
 
     // Constructor for this class
     public GameImage(Bitmap bitmap) {
-        this.bitmap = bitmap;
+        this.bitmap= bitmap;
     }
 
     public Bitmap getBitmap() {

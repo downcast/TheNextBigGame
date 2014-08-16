@@ -23,3 +23,9 @@ public class MainActivity extends Activity{
 	}
 }
 
+/*
+ * private MediaPlayer ThemeMusic= new MediaPlayer();
+ * ThemeMusic= MediaPlayer.create(MainActivity.this, R.raw.theme_music_dark_tension);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		ThemeMusic.start();
+		*/
