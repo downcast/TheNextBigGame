@@ -8,6 +8,7 @@ import android.view.Menu;
 
 // Here is the most basic skeleton for a moving image I could make. 
 // The news Helicopter moves diagonally towards the bottom right side of the screen
+
 public class MainActivity extends Activity{
 	private MediaPlayer ThemeMusic= new MediaPlayer();
 	@Override
@@ -27,3 +28,8 @@ public class MainActivity extends Activity{
 		return true;
 	}
 }
+
+
+  
+  
+		

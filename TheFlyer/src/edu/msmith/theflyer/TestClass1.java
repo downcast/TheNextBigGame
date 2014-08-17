@@ -10,14 +10,14 @@ import android.view.SurfaceView;
 
 /** This is the view of the MainActivity like mainActivity.xml. Just setContentView to this class.
  * 
- * @author Marcus
+ * @author Marcus and Sherdon
  *
  */
 public class TestClass1 extends SurfaceView implements SurfaceHolder.Callback{
 
 	private GameLoop Loop; // Seperate Thread
-	private Bitmap image;  // The helicopter Image in raw form
-	private GameImage gameImage; // The helicopter in object form
+	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
+	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
 	
 	public TestClass1(Context context) {
 		super(context);
@@ -25,10 +25,22 @@ public class TestClass1 extends SurfaceView implements SurfaceHolder.Callback{
 		getHolder().addCallback(this);
 		
 		// Load the image into game
-		image= BitmapFactory.decodeResource(getResources(), R.drawable.testheli);
+		//image= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_big2);
+		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
+		helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
+		redBuildingLarge= BitmapFactory.decodeResource(getResources(), R.drawable.building_red_size);
+		blueBuildingMid= BitmapFactory.decodeResource(getResources(), R.drawable.building_blue_size);
+		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
+		character= BitmapFactory.decodeResource(getResources(), R.drawable.flyer_guy_size70);
+		//image= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size85);
 		// Attach image to the custom obj
-		gameImage= new GameImage(image);
-		
+		//gameImage= new GameImage(image);
+		helicopterNewsImage= new GameImage(helicopterNews);
+		helicopterMiliaryImage= new GameImage(helicopterMiliary);
+		redBuildingImage= new GameImage(redBuildingLarge);
+		blueBuildingImage= new GameImage(blueBuildingMid);
+		yellowBuildingImage= new GameImage(yellowBuildingSmall);
+		characterImage= new GameImage(character);
 		
 		Loop= new GameLoop(getHolder(), this);
 		// Allows the callbacks to work
@@ -58,6 +70,12 @@ public class TestClass1 extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	public void render(Canvas canvas){
-		gameImage.draw(canvas);
+		//gameImage.draw(canvas);
+		helicopterNewsImage.helicopter_news(canvas);
+		helicopterMiliaryImage.helicopter_military(canvas);
+		redBuildingImage.red_building(canvas);
+		blueBuildingImage.blue_building(canvas);
+		yellowBuildingImage.yellow_building(canvas);
+		characterImage.main_character(canvas);
 	}
 }
