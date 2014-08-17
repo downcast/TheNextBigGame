@@ -26,8 +26,9 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private static int count= 0;
 	private SurfaceView sv;
 	private GameLoop Loop; // Seperate Thread
-	private Bitmap image;  // The helicopter Image in raw form
-	private GameImage gameImage; // The helicopter in object form
+	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
+	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,21 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ThemeMusic.start();
 		
-		// Load the image into game
-		image= BitmapFactory.decodeResource(getResources(), R.drawable.testheli);
+		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
+		helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
+		redBuildingLarge= BitmapFactory.decodeResource(getResources(), R.drawable.building_red_size);
+		blueBuildingMid= BitmapFactory.decodeResource(getResources(), R.drawable.building_blue_size);
+		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
+		character= BitmapFactory.decodeResource(getResources(), R.drawable.flyer_guy_size70);
+		//image= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size85);
 		// Attach image to the custom obj
-		gameImage= new GameImage(image);
+		//gameImage= new GameImage(image);
+		helicopterNewsImage= new GameImage(helicopterNews);
+		helicopterMiliaryImage= new GameImage(helicopterMiliary);
+		redBuildingImage= new GameImage(redBuildingLarge);
+		blueBuildingImage= new GameImage(blueBuildingMid);
+		yellowBuildingImage= new GameImage(yellowBuildingSmall);
+		characterImage= new GameImage(character);
 
 		Loop= new GameLoop(sv.getHolder(), this);
 		// Allows the callbacks to work
@@ -66,7 +78,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "On Click");
-		gameImage.setY(count);
+		characterImage.setY(count);
 		count+=10;
 	}
 
@@ -91,7 +103,11 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 	
 	public void render(Canvas canvas){
-
-		//gameImage.draw(canvas);
+		helicopterNewsImage.helicopter_news(canvas);
+		helicopterMiliaryImage.helicopter_military(canvas);
+		redBuildingImage.red_building(canvas);
+		blueBuildingImage.blue_building(canvas);
+		yellowBuildingImage.yellow_building(canvas);
+		characterImage.main_character(canvas);
 	}
 }
