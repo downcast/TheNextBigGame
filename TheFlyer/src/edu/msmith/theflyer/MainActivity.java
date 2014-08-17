@@ -18,6 +18,7 @@ import android.widget.Button;
 
 // Here is the most basic skeleton for a moving image I could make. 
 // The news Helicopter moves diagonally towards the bottom right side of the screen
+
 public class MainActivity extends Activity implements OnClickListener, SurfaceHolder.Callback{
 	
 	private MediaPlayer ThemeMusic= new MediaPlayer();
@@ -91,6 +92,6 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	
 	public void render(Canvas canvas){
 
-		gameImage.draw(canvas);
+		//gameImage.draw(canvas);
 	}
 }

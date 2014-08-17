@@ -34,7 +34,7 @@ public class GameLoop extends Thread implements Runnable{
 				// This clears the screen by drawing the background color
 				canvas.drawColor(Color.BLUE);
 				// This ultimately makes its way down to the GameImage obj who actually draws the heli
-				this.mainActivity.render(canvas);
+				//this.mainActivity.render(canvas);
 				// This is what unlocks the canvas and outputs what we drew to the user.
 				this.surfaceHolder.unlockCanvasAndPost(canvas);
 			}
