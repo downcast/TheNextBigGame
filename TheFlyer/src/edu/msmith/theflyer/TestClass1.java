@@ -1,5 +1,6 @@
 package edu.msmith.theflyer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +20,8 @@ public class TestClass1 extends SurfaceView implements SurfaceHolder.Callback{
 	private Bitmap image;  // The helicopter Image in raw form
 	private GameImage gameImage; // The helicopter in object form
 	
-	public TestClass1(Context context) {
-		super(context);
+	public TestClass1(Activity activity) {
+		super(activity);
 		//intercept callback events
 		getHolder().addCallback(this);
 		
@@ -29,8 +30,7 @@ public class TestClass1 extends SurfaceView implements SurfaceHolder.Callback{
 		// Attach image to the custom obj
 		gameImage= new GameImage(image);
 		
-		
-		Loop= new GameLoop(getHolder(), this);
+		//Loop= new GameLoop(getHolder(), this);
 		// Allows the callbacks to work
 		this.setFocusable(true);
 		

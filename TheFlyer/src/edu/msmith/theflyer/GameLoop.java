@@ -10,16 +10,16 @@ public class GameLoop extends Thread implements Runnable{
 	
 	// Allows access to the surface
 	private SurfaceHolder surfaceHolder;
-	private TestClass1 testClass;
-	private Canvas canvas;
+	private MainActivity mainActivity;
+	protected Canvas canvas;
 	
 	// This or similar vari we can use to end the game
 	private boolean isRunning;
 	
-	public GameLoop (SurfaceHolder sh, TestClass1 tc){
+	public GameLoop (SurfaceHolder sh, MainActivity ma){
 		super();
 		this.surfaceHolder= sh;
-		this.testClass= tc;
+		this.mainActivity= ma;
 	}
 	
 	public void run(){
@@ -34,7 +34,7 @@ public class GameLoop extends Thread implements Runnable{
 				// This clears the screen by drawing the background color
 				canvas.drawColor(Color.BLUE);
 				// This ultimately makes its way down to the GameImage obj who actually draws the heli
-				this.testClass.render(canvas);
+				this.mainActivity.render(canvas);
 				// This is what unlocks the canvas and outputs what we drew to the user.
 				this.surfaceHolder.unlockCanvasAndPost(canvas);
 			}

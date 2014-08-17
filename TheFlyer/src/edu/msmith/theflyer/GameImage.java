@@ -6,11 +6,15 @@ import android.graphics.Canvas;
 public class GameImage {
 
     private Bitmap bitmap; // the actual bitmap
+    private static int x=0;
+	private static int y= 0;
     public static int move= 1; // This is what I used to make the image move
 
     // Constructor for this class
     public GameImage(Bitmap bitmap) {
         this.bitmap= bitmap;
+        GameImage.x= bitmap.getWidth();
+        GameImage.y= bitmap.getHeight();
     }
 
     public Bitmap getBitmap() {
@@ -21,9 +25,25 @@ public class GameImage {
         this.bitmap = bitmap;
     }
 
+    protected int getX() {
+		return x;
+	}
+
+	protected void setX(int x) {
+		GameImage.x = x;
+	}
+
+	protected int getY() {
+		return y;
+	}
+
+	protected void setY(int y) {
+		GameImage.y = y;
+	}
+	
     /* Method to draw images on Canvas */
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,5, null);
+        canvas.drawBitmap(bitmap, move, GameImage.y, null);
         move+=5;
     }
 }
