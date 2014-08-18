@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
 	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
-
+	private boolean run= false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	public void surfaceCreated(SurfaceHolder arg0) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Surface has been created");
+		this.run= true;
 		Loop.start();
 	}
 
@@ -100,6 +101,17 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Surface has been demoed");
+		boolean retry= true;
+		while (retry= true){
+		try {
+			Loop.setIsRunning(false);
+			Loop.join();
+			retry= false;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}	
 	}
 	
 	public void render(Canvas canvas){
