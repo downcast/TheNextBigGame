@@ -78,6 +78,15 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 
 	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		// Called when the home button is pressed
+		Log.d("Custom", "Activity Paused");
+		super.onPause();
+		ThemeMusic.stop();
+	}
+
+	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "On Click");
@@ -132,17 +141,6 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		Log.d("Custom", "Activity Stopped");
 		super.onStop();
 	}
-
-
-	@Override
-	protected void onPause() {
-		// Called when the home button is pressed
-		Log.d("Custom", "Activity Paused");
-		super.onResume();
-		
-	}
-	
-
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
