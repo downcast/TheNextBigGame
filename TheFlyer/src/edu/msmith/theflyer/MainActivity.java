@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private Button but;
 	private static int count= 0;
 	private SurfaceView sv;
+	private Surface s;
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
 	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
@@ -67,6 +69,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		//this.setFocusable(true);
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -81,6 +84,65 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		characterImage.setY(count);
 		count+=10;
 	}
+
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity Destroy");
+		super.onDestroy();
+	}
+
+
+	@Override
+	protected void onPostResume() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity PostResume");
+		super.onPostResume();
+	}
+
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity Restart");
+		super.onRestart();
+	}
+
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity Resume");
+		super.onResume();
+	}
+
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity Started");
+		super.onStart();
+	}
+
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		Log.d("Custom", "Activity Stopped");
+		super.onStop();
+	}
+
+
+	@Override
+	protected void onPause() {
+		// Called when the home button is pressed
+		Log.d("Custom", "Activity Paused");
+		super.onResume();
+		
+	}
+	
+
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
@@ -98,7 +160,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 
 	@Override
-	public void surfaceDestroyed(SurfaceHolder arg0) {
+	public void surfaceDestroyed(SurfaceHolder sh) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Surface has been demoed");
 		boolean retry= true;
@@ -112,6 +174,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 			e.printStackTrace();
 		}
 		}	
+		this.s= sh.getSurface();
 	}
 	
 	public void render(Canvas canvas){
@@ -122,4 +185,6 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		yellowBuildingImage.yellow_building(canvas);
 		characterImage.main_character(canvas);
 	}
+
+
 }

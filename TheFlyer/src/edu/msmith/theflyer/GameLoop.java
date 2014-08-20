@@ -23,7 +23,7 @@ public class GameLoop extends Thread implements Runnable{
 	
 	public void run(){
 		// For some reason I cant stop this run function
-		while (isRunning= true){
+		while (this.isRunning= true){
 			Log.d("Custom", "GameLoop is running");
 			try {
 				// Not 100% sure, but it seems to get the current canvas, as in, what the user sees.
