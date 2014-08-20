@@ -37,6 +37,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		// This is going to link our custom canvas with the mainAcitivty one.
 		setContentView(R.layout.activity_main);
 		
+		
 		but= (Button) this.findViewById(R.id.button1);
 		but.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
@@ -45,6 +46,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		ThemeMusic= MediaPlayer.create(MainActivity.this, R.raw.thememusic);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ThemeMusic.start();
+		//ThemeMusic.release();
 		
 		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
 		helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
@@ -66,12 +68,45 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		// Allows the callbacks to work
 		//this.setFocusable(true);
 	}
+	
+	//protected void onStop() {
+	    //super.onStop();  // Always call the superclass method first
+
+	    // Save the note's current draft, because the activity is stopping
+	    // and we want to be sure the current note progress isn't lost.
+	  //////  ContentValues values = new ContentValues();
+	   /////// values.put(NotePad.Notes.COLUMN_NAME_NOTE, getCurrentNoteText());
+	  //////  values.put(NotePad.Notes.COLUMN_NAME_TITLE, getCurrentNoteTitle());
+
+	  //////  getContentResolver().update(
+	     //       mUri,    // The URI for the note to update.
+	    //        values,  // The map of column names and new values to apply to them.
+	     //       null,    // No SELECT criteria are used.
+	     //       null     // No WHERE columns are used.
+	     //       );
+	//}
+	//ThemeMusic.onStop();
+	//protected void onStop ()
+	//{
+	//	ThemeMusic.release();
+	//finish();
+	//}
+	
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		ThemeMusic.stop();
 	}
 
 	@Override
@@ -122,4 +157,11 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		yellowBuildingImage.yellow_building(canvas);
 		characterImage.main_character(canvas);
 	}
+	
+	//protected void onDestroy() {        
+	   // super.onDestroy();
+	    //releaseMediaPlayer();
+	   // ((Activity) ThemeMusic).onDestroy();
+	//}
+	//ThemeMusic.
 }

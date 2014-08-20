@@ -46,10 +46,19 @@ public class GameLoop extends Thread implements Runnable{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}//finally{
+			//	intent openStartingPoint = new Intent("");
+			//	startActivity(openStartingPoint);
+			//}
 
 		}
 	}
+	
+	//protected void onStop ()
+	//{
+	//	super.onPause();
+	//	finish();
+	//}
 	
 	public void setIsRunning(boolean bool){
 		this.isRunning= bool;
@@ -58,4 +67,6 @@ public class GameLoop extends Thread implements Runnable{
 	public boolean getIsRunning(){
 		return isRunning;
 	}
+	
+	
 }
