@@ -26,11 +26,9 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private Button but;
 	private static int count= 0;
 	private SurfaceView sv;
-	private Surface s;
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
 	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
-	private boolean run= false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,33 +46,22 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ThemeMusic.start();
 		
-		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
-		helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
-		redBuildingLarge= BitmapFactory.decodeResource(getResources(), R.drawable.building_red_size);
-		blueBuildingMid= BitmapFactory.decodeResource(getResources(), R.drawable.building_blue_size);
-		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
+		//helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
+		//helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
+		//redBuildingLarge= BitmapFactory.decodeResource(getResources(), R.drawable.building_red_size);
+		//blueBuildingMid= BitmapFactory.decodeResource(getResources(), R.drawable.building_blue_size);
+		//yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
 		character= BitmapFactory.decodeResource(getResources(), R.drawable.flyer_guy_size70);
-		//image= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size85);
-		// Attach image to the custom obj
-		//gameImage= new GameImage(image);
-		helicopterNewsImage= new GameImage(helicopterNews);
-		helicopterMiliaryImage= new GameImage(helicopterMiliary);
-		redBuildingImage= new GameImage(redBuildingLarge);
-		blueBuildingImage= new GameImage(blueBuildingMid);
-		yellowBuildingImage= new GameImage(yellowBuildingSmall);
+
+		//helicopterNewsImage= new GameImage(helicopterNews);
+		//helicopterMiliaryImage= new GameImage(helicopterMiliary);
+		//redBuildingImage= new GameImage(redBuildingLarge);
+		//blueBuildingImage= new GameImage(blueBuildingMid);
+		//yellowBuildingImage= new GameImage(yellowBuildingSmall);
 		characterImage= new GameImage(character);
 
 		Loop= new GameLoop(sv.getHolder(), this);
-		// Allows the callbacks to work
-		//this.setFocusable(true);
-	}
 
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	@Override
@@ -83,18 +70,18 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		// Called when the home button is pressed
 		Log.d("Custom", "Activity Paused");
 		super.onPause();
-		ThemeMusic.stop();
+		ThemeMusic.pause();
+		Loop.setIsRunning(false);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// Here we will control the character movements; Possibly move control to a while pressed instead to get a fluid motion
 		Log.d("Custom", "On Click");
 		characterImage.setY(count);
 		count+=10;
 	}
 
-	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -102,22 +89,13 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		super.onDestroy();
 	}
 
-
-	@Override
-	protected void onPostResume() {
-		// TODO Auto-generated method stub
-		Log.d("Custom", "Activity PostResume");
-		super.onPostResume();
-	}
-
-
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
+		// Called when the user comes back to the game before creating the surface. WE restart the music.
 		Log.d("Custom", "Activity Restart");
 		super.onRestart();
+		ThemeMusic.start();
 	}
-
 
 	@Override
 	protected void onResume() {
@@ -126,14 +104,12 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		super.onResume();
 	}
 
-
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Activity Started");
 		super.onStart();
 	}
-
 
 	@Override
 	protected void onStop() {
@@ -151,36 +127,31 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
-		// TODO Auto-generated method stub
+		// When the user comes back to the game this function is called again. So we test the state of the thread to determine whether
+		// has been started. When the thread is terminated, we reinitialize the thread and start it.
 		Log.d("Custom", "Surface has been created");
-		this.run= true;
-		Loop.start();
+		if (Loop.getState()== Thread.State.NEW){
+			Log.d("Custom", "New Thread");
+			Loop.start();
+		}else{
+			Log.d("Custom", Loop.getState().toString());
+			Loop= new GameLoop(sv.getHolder(), this);
+			Loop.start();
+		}	
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder sh) {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Surface has been demoed");
-		boolean retry= true;
-		while (retry= true){
-		try {
-			Loop.setIsRunning(false);
-			Loop.join();
-			retry= false;
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}	
-		this.s= sh.getSurface();
 	}
 	
 	public void render(Canvas canvas){
-		helicopterNewsImage.helicopter_news(canvas);
-		helicopterMiliaryImage.helicopter_military(canvas);
-		redBuildingImage.red_building(canvas);
-		blueBuildingImage.blue_building(canvas);
-		yellowBuildingImage.yellow_building(canvas);
+		//helicopterNewsImage.helicopter_news(canvas);
+		//helicopterMiliaryImage.helicopter_military(canvas);
+		//redBuildingImage.red_building(canvas);
+		//blueBuildingImage.blue_building(canvas);
+		//yellowBuildingImage.yellow_building(canvas);
 		characterImage.main_character(canvas);
 	}
 

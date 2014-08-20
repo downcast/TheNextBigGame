@@ -2,13 +2,13 @@ package edu.msmith.theflyer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 
 public class GameImage {
 
     private Bitmap bitmap; // the actual bitmap
     private static int x=0;
 	private static int y= 0;
-    //public static int move= 1; // This is what I used to make the image move
 	public static int move= 1256; // This is what I used to make the image move
 
     // Constructor for this class
@@ -82,7 +82,8 @@ public class GameImage {
     //the buildings and helicopters are the only things moving
     //characters
     public void main_character(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, GameImage.y, null);
+        canvas.drawBitmap(bitmap, 10, GameImage.y, null);
+        Log.d("Custom", "Character drawn");
        // move+=5;//move = move + 5
     }
 }
