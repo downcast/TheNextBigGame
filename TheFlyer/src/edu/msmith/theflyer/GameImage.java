@@ -82,7 +82,7 @@ public class GameImage {
     //the buildings and helicopters are the only things moving
     //characters
     public void main_character(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 10, GameImage.y, null);
+        canvas.drawBitmap(bitmap, 0, GameImage.y, null);
         Log.d("Custom", "Character drawn");
        // move+=5;//move = move + 5
     }

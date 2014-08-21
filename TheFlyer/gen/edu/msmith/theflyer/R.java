@@ -44,10 +44,14 @@ containing a value of this type.
         public static final int building_red_size=0x7f020001;
         public static final int building_yellow_size=0x7f020002;
         public static final int flyer_guy_size70=0x7f020003;
-        public static final int helicopter_military_size75=0x7f020004;
-        public static final int helicopter_news_size75=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int testheli=0x7f020007;
+        public static final int game_guy_size25=0x7f020004;
+        public static final int game_guy_size35=0x7f020005;
+        public static final int game_guy_size50=0x7f020006;
+        public static final int game_guy_size51=0x7f020007;
+        public static final int helicopter_military_size75=0x7f020008;
+        public static final int helicopter_news_size75=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int testheli=0x7f02000b;
     }
     public static final class id {
         public static final int action_settings=0x7f050004;
