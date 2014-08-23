@@ -7,7 +7,8 @@ import android.util.Log;
 public class GameImage {
 
     private Bitmap bitmap; // the actual bitmap
-    private static int x=0;
+    private static int x=0;//flying guy
+    private static int yObjects=0;//objects moving across platform
 	private static int y= 0;
 	public static int move= 1256; // This is what I used to make the image move
 
@@ -15,6 +16,7 @@ public class GameImage {
     public GameImage(Bitmap bitmap) {
         this.bitmap= bitmap;
         GameImage.x= bitmap.getWidth();
+        GameImage.yObjects= bitmap.getWidth();
         GameImage.y= bitmap.getHeight();
     }
 
@@ -33,6 +35,14 @@ public class GameImage {
 	protected void setX(int x) {
 		GameImage.x = x;
 	}
+	
+	 protected int getYObjects() {
+			return yObjects;
+		}
+
+		protected void setYObjects(int yObjects) {
+			GameImage.yObjects = yObjects;
+		}
 
 	protected int getY() {
 		return y;
@@ -47,35 +57,41 @@ public class GameImage {
      //   canvas.drawBitmap(bitmap, move,5, null);
      //   move+=5;//move = move + 5
     //}
+	
+	//cloud
+    public void cloud(Canvas canvas) {
+           canvas.drawBitmap(bitmap, move,GameImage.y, null);
+           move-=5;//move = move + 5
+       }
     
     
     //helicopter news
     public void helicopter_news(Canvas canvas) {
-           canvas.drawBitmap(bitmap, move,5, null);
+           canvas.drawBitmap(bitmap, move,GameImage.y, null);
            move-=5;//move = move + 5
        }
     
     //helicopter military
     public void helicopter_military(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,5, null);
+        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
         move-=5;//move = move + 5
     }
     
     //red building
     public void red_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,5, null);
+        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
         move-=5;//move = move + 5
     }
     
     //blue building
     public void blue_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,5, null);
+        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
         move-=5;//move = move + 5
     }
     
     //yellow building
     public void yellow_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,5, null);
+        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
         move-=5;//move = move + 5
     }
     

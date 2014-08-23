@@ -27,8 +27,8 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private static int count= 0;
 	private SurfaceView sv;
 	private GameLoop Loop; // Seperate Thread
-	private Bitmap helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
-	private GameImage helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
+	private Bitmap Cloud, helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
+	private GameImage cloudImage, helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ThemeMusic.start();
 		
+		Cloud= BitmapFactory.decodeResource(getResources(), R.drawable.cloud);
 		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
 		helicopterMiliary= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_military_size75);
 		redBuildingLarge= BitmapFactory.decodeResource(getResources(), R.drawable.building_red_size);
@@ -53,6 +54,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
 		character= BitmapFactory.decodeResource(getResources(), R.drawable.game_guy_size25);//70
 
+		cloudImage= new GameImage(Cloud);
 		helicopterNewsImage= new GameImage(helicopterNews);
 		helicopterMiliaryImage= new GameImage(helicopterMiliary);
 		redBuildingImage= new GameImage(redBuildingLarge);
@@ -147,6 +149,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 	
 	public void render(Canvas canvas){
+		cloudImage.helicopter_news(canvas);
 		helicopterNewsImage.helicopter_news(canvas);
 		helicopterMiliaryImage.helicopter_military(canvas);
 		redBuildingImage.red_building(canvas);
