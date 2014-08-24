@@ -10,8 +10,10 @@ public class GameImage {
 	private static int y= 0;
 	private final int CLOUDMOVE= 1; // We use these constants to control the pixel move speed of each category of images
 	private final int BUILDMOVE= 2;
-	private final int HELIMOVE= 3;
-	public static int cloudLocationX, buildLocationX, heliLocationX= 1256; // We use these to track the x (in relation to y) location in each category of images 
+	private final int HELIMOVE= 4;
+	public static int cloudLocationX = 1256;
+	public static int buildLocationX = 1256;
+	public static int heliLocationX = 1256; // We use these to track the x (in relation to y) location in each category of images 
 	private int screenheight, screenwidth;
 
 
@@ -64,25 +66,25 @@ public class GameImage {
     
     //helicopter military
     public void helicopter_military(Canvas canvas) {
-        canvas.drawBitmap(bitmap, GameImage.heliLocationX,this.screenheight / 3, null);
+        canvas.drawBitmap(bitmap, GameImage.heliLocationX,this.screenheight / 11, null);
         GameImage.heliLocationX-=this.HELIMOVE;
     }
     
-    //red building
+    //red building large building
     public void red_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight, null);
+        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight / 4, null);
         GameImage.buildLocationX-=this.BUILDMOVE;
     }
     
-    //blue building
+    //blue building medium building
     public void blue_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight, null);
+        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight / 3, null);
         GameImage.buildLocationX-=this.BUILDMOVE;
     }
     
-    //yellow building
+    //yellow building small building
     public void yellow_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight, null);
+        canvas.drawBitmap(bitmap, GameImage.buildLocationX,this.screenheight / 2, null);
         GameImage.buildLocationX-=this.BUILDMOVE;
     }
     
