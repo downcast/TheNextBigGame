@@ -149,7 +149,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 	
 	public void render(Canvas canvas){
-		cloudImage.helicopter_news(canvas);
+		cloudImage.cloud(canvas);
 		helicopterNewsImage.helicopter_news(canvas);
 		helicopterMiliaryImage.helicopter_military(canvas);
 		redBuildingImage.red_building(canvas);
