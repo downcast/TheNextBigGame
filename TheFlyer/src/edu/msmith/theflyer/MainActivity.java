@@ -41,6 +41,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		screenheight = getResources().getConfiguration().screenHeightDp;
 		screenwidth = getResources().getConfiguration().screenWidthDp;
 		
+		
 		but= (Button) this.findViewById(R.id.button1);
 		but.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
@@ -58,13 +59,14 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
 		character= BitmapFactory.decodeResource(getResources(), R.drawable.game_guy_size25);//70
 
-		cloudImage= new GameImage(Cloud);
-		helicopterNewsImage= new GameImage(helicopterNews);
-		helicopterMiliaryImage= new GameImage(helicopterMiliary);
-		redBuildingImage= new GameImage(redBuildingLarge);
-		blueBuildingImage= new GameImage(blueBuildingMid);
-		yellowBuildingImage= new GameImage(yellowBuildingSmall);
-		characterImage= new GameImage(character);
+		cloudImage= new GameImage(Cloud,screenheight,screenwidth);
+		
+		helicopterNewsImage= new GameImage(helicopterNews,screenheight,screenwidth);
+		helicopterMiliaryImage= new GameImage(helicopterMiliary,screenheight,screenwidth);
+		redBuildingImage= new GameImage(redBuildingLarge,screenheight,screenwidth);
+		blueBuildingImage= new GameImage(blueBuildingMid,screenheight,screenwidth);
+		yellowBuildingImage= new GameImage(yellowBuildingSmall,screenheight,screenwidth);
+		characterImage= new GameImage(character,screenheight,screenwidth);
 
 		Loop= new GameLoop(sv.getHolder(), this);
 

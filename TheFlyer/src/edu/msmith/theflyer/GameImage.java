@@ -8,16 +8,17 @@ public class GameImage {
 
     private Bitmap bitmap; // the actual bitmap
     private static int x=0;//flying guy
-    private static int yObjects=0;//objects moving across platform
 	private static int y= 0;
 	public static int move= 1256; // This is what I used to make the image move
+	private int screenheight, screenwidth;
 
     // Constructor for this class
-    public GameImage(Bitmap bitmap) {
+    public GameImage(Bitmap bitmap,  int screenHeight, int screenWidth) {
         this.bitmap= bitmap;
         GameImage.x= bitmap.getWidth();
-        GameImage.yObjects= bitmap.getWidth();
         GameImage.y= bitmap.getHeight();
+        this.screenheight = screenHeight;
+        this.screenwidth = screenWidth;
     }
 
     public Bitmap getBitmap() {
@@ -36,13 +37,6 @@ public class GameImage {
 		GameImage.x = x;
 	}
 	
-	 protected int getYObjects() {
-			return yObjects;
-		}
-
-		protected void setYObjects(int yObjects) {
-			GameImage.yObjects = yObjects;
-		}
 
 	protected int getY() {
 		return y;
@@ -73,32 +67,32 @@ public class GameImage {
     
     //helicopter military
     public void helicopter_military(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
+        canvas.drawBitmap(bitmap, move,GameImage.y, null);
         move-=5;//move = move + 5
     }
     
     //red building
     public void red_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
+        canvas.drawBitmap(bitmap, move,this.screenheight + 1, null);
         move-=5;//move = move + 5
     }
     
     //blue building
     public void blue_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
+        canvas.drawBitmap(bitmap, move,this.screenheight + 1, null);
         move-=5;//move = move + 5
     }
     
     //yellow building
     public void yellow_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,GameImage.yObjects, null);
+        canvas.drawBitmap(bitmap, move,this.screenheight + 1, null);
         move-=5;//move = move + 5
     }
     
     //the buildings and helicopters are the only things moving
     //characters
     public void main_character(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, GameImage.y, null);
+        canvas.drawBitmap(bitmap, 0, this.screenheight + 20, null);
         Log.d("Custom", "Character drawn");
        // move+=5;//move = move + 5
     }
