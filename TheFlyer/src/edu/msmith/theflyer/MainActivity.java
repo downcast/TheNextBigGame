@@ -23,7 +23,7 @@ import android.widget.Button;
 public class MainActivity extends Activity implements OnClickListener, SurfaceHolder.Callback{
 	
 	private MediaPlayer ThemeMusic= new MediaPlayer();
-	private Button but;
+	private Button but, but2;
 	private static int count= 0;
 	private SurfaceView sv;
 	private GameLoop Loop; // Seperate Thread
@@ -43,7 +43,9 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		
 		
 		but= (Button) this.findViewById(R.id.button1);
+		but2= (Button) this.findViewById(R.id.button2);
 		but.setOnClickListener(this);
+		but2.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
 		sv.getHolder().addCallback(this);
 		
@@ -86,8 +88,16 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	public void onClick(View v) {
 		// Here we will control the character movements; Possibly move control to a while pressed instead to get a fluid motion
 		Log.d("Custom", "On Click");
-		characterImage.setY(count);
-		count+=10;
+		switch(v.getId()){
+		case R.id.button2:
+			characterImage.setY(count);
+			count+=10;
+			break;
+		case R.id.button1:
+			characterImage.setY(count);
+			count-=10;
+			break;
+		}
 	}
 
 	@Override
