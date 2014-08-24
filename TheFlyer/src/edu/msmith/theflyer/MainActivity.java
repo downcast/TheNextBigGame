@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap Cloud, helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
 	private GameImage cloudImage, helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
+	private int screenheight, screenwidth;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// This is going to link our custom canvas with the mainAcitivty one.
 		setContentView(R.layout.activity_main);
+		
+		screenheight = getResources().getConfiguration().screenHeightDp;
+		screenwidth = getResources().getConfiguration().screenWidthDp;
 		
 		but= (Button) this.findViewById(R.id.button1);
 		but.setOnClickListener(this);
