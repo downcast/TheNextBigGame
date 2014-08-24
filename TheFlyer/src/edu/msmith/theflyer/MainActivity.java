@@ -90,12 +90,12 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		Log.d("Custom", "On Click");
 		switch(v.getId()){
 		case R.id.button2:
+			count-=10;
 			characterImage.setY(count);
-			count+=10;
 			break;
 		case R.id.button1:
+			count+=10;
 			characterImage.setY(count);
-			count-=10;
 			break;
 		}
 	}
