@@ -8,19 +8,18 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.Surface;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
 
 // Here is the most basic skeleton for a moving image I could make. 
 // The news Helicopter moves diagonally towards the bottom right side of the screen
 
-public class MainActivity extends Activity implements OnClickListener, SurfaceHolder.Callback{
+public class MainActivity extends Activity implements OnTouchListener, SurfaceHolder.Callback{
 	
 	private MediaPlayer ThemeMusic= new MediaPlayer();
 	private Button downBut, upBut;
@@ -29,6 +28,8 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	private Bitmap Cloud, helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
 	private GameImage cloudImage, helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
 	private int screenheight, screenwidth;
+	private boolean pressedUp= false;
+	private CharacterMovementTask CMT;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,10 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		
 		downBut= (Button) this.findViewById(R.id.DownButton);
 		upBut= (Button) this.findViewById(R.id.UpButton);
-		downBut.setOnClickListener(this);
-		upBut.setOnClickListener(this);
+		downBut.setOnTouchListener(this);
+		upBut.setOnTouchListener(this);
+		//downBut.setOnClickListener(this);
+		//upBut.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
 		sv.getHolder().addCallback(this);
 		
@@ -84,19 +87,48 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 	}
 
 	@Override
-	public void onClick(View v) {
-		// Here we will control the character movements; Possibly move control to a while pressed instead to get a fluid motion
-		Log.d("Custom", "On Click");
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.UpButton:
-			characterImage.setY(characterImage.getY()-10);
+			switch(event.getAction()){
+			case MotionEvent.ACTION_DOWN:
+				if(pressedUp == false){
+	                //pressedUp = true;
+	                CMT= new CharacterMovementTask(characterImage,-10);
+	                CMT.execute();
+	            }
+				break;
+			case MotionEvent.ACTION_UP:
+				while (!pressedUp){
+					pressedUp= CMT.cancel(true);
+				}
+				pressedUp= true;
+				break;
+			}
 			break;
 		case R.id.DownButton:
-			characterImage.setY(characterImage.getY()+10);
+			switch(event.getAction()){
+			case MotionEvent.ACTION_DOWN:
+				if(pressedUp == false){
+	                //pressedUp = true;
+	                CMT= new CharacterMovementTask(characterImage, 10);
+	                CMT.execute();
+	            }
+				break;
+			case MotionEvent.ACTION_UP:
+				while (!pressedUp){
+					pressedUp= CMT.cancel(true);
+				}
+				pressedUp= true;
+				break;
+			}
 			break;
 		}
+		pressedUp= false;
+		return false;
 	}
-
+	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -168,9 +200,6 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		redBuildingImage.red_building(canvas);
 		blueBuildingImage.blue_building(canvas);
 		yellowBuildingImage.yellow_building(canvas);
-		if (characterImage.readyRender()== true)
-			characterImage.main_character(canvas);
+		characterImage.main_character(canvas);
 	}
-
-
 }
