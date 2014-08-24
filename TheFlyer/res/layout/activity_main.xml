@@ -22,15 +22,15 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/UpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignRight="@+id/button1"
+        android:layout_above="@+id/DownButton"
+        android:layout_alignRight="@+id/DownButton"
         android:text="up" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/DownButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

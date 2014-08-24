@@ -9,8 +9,12 @@ public class GameImage {
     private Bitmap bitmap; // the actual bitmap
     private static int x=0;//flying guy
 	private static int y= 0;
-	public static int move= 1256; // This is what I used to make the image move
+	private final int CLOUDMOVE= 1; // We use these constants to control the pixel move speed of each category of images
+	private final int BUILDMOVE= 2;
+	private final int HELIMOVE= 3;
+	public static int cloudLocationX, buildLocationX, heliLocationX= 1256; // We use these to track the x (in relation to y) location in each category of images 
 	private int screenheight, screenwidth;
+	public boolean ready= true;
 
     // Constructor for this class
     public GameImage(Bitmap bitmap,  int screenHeight, int screenWidth) {
@@ -19,6 +23,10 @@ public class GameImage {
         GameImage.y= bitmap.getHeight();
         this.screenheight = screenHeight;
         this.screenwidth = screenWidth;
+    }
+    
+    public boolean readyRender(){
+    	return this.ready;
     }
 
     public Bitmap getBitmap() {
@@ -48,45 +56,45 @@ public class GameImage {
 	
     /* Method to draw images on Canvas */
     ///public void draw(Canvas canvas) {
-     //   canvas.drawBitmap(bitmap, move,5, null);
-     //   move+=5;//move = move + 5
+     //   canvas.drawBitmap(bitmap, LocationX,5, null);
+     //   LocationX+=5;//LocationX = LocationX + 5
     //}
 	
 	//cloud
     public void cloud(Canvas canvas) {
-           canvas.drawBitmap(bitmap, move,this.screenheight / 3, null);
-           move-=5;//move = move + 5
+           canvas.drawBitmap(bitmap, this.cloudLocationX,this.screenheight / 3, null);
+           cloudLocationX-=this.CLOUDMOVE;//LocationX = LocationX + 5
        }
     
     
     //helicopter news
     public void helicopter_news(Canvas canvas) {
-           canvas.drawBitmap(bitmap, move,this.screenheight / 3, null);
-           move-=5;//move = move + 5
+           canvas.drawBitmap(bitmap, this.heliLocationX,this.screenheight / 3, null);
+           this.heliLocationX-=this.HELIMOVE;//LocationX = LocationX + 5
        }
     
     //helicopter military
     public void helicopter_military(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,this.screenheight / 3, null);
-        move-=5;//move = move + 5
+        canvas.drawBitmap(bitmap, this.heliLocationX,this.screenheight / 3, null);
+        this.heliLocationX-=this.HELIMOVE;//LocationX = LocationX + 5
     }
     
     //red building
     public void red_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,this.screenheight, null);
-        move-=5;//move = move + 5
+        canvas.drawBitmap(bitmap, this.buildLocationX,this.screenheight, null);
+        this.buildLocationX-=this.BUILDMOVE;//LocationX = LocationX + 5
     }
     
     //blue building
     public void blue_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,this.screenheight, null);
-        move-=5;//move = move + 5
+        canvas.drawBitmap(bitmap, this.buildLocationX,this.screenheight, null);
+        this.buildLocationX-=this.BUILDMOVE;//LocationX = LocationX + 5
     }
     
     //yellow building
     public void yellow_building(Canvas canvas) {
-        canvas.drawBitmap(bitmap, move,this.screenheight, null);
-        move-=5;//move = move + 5
+        canvas.drawBitmap(bitmap, this.buildLocationX,this.screenheight, null);
+        this.buildLocationX-=this.BUILDMOVE;//LocationX = LocationX + 5
     }
     
     //the buildings and helicopters are the only things moving
@@ -94,6 +102,6 @@ public class GameImage {
     public void main_character(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, GameImage.y, null);
         Log.d("Custom", "Character drawn");
-       // move+=5;//move = move + 5
+       // LocationX+=5;//LocationX = LocationX + 5
     }
 }

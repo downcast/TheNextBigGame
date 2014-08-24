@@ -23,8 +23,7 @@ import android.widget.Button;
 public class MainActivity extends Activity implements OnClickListener, SurfaceHolder.Callback{
 	
 	private MediaPlayer ThemeMusic= new MediaPlayer();
-	private Button but, but2;
-	private static int count= 0;
+	private Button downBut, upBut;
 	private SurfaceView sv;
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap Cloud, helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
@@ -42,10 +41,10 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		screenwidth = getResources().getConfiguration().screenWidthDp;
 		
 		
-		but= (Button) this.findViewById(R.id.button1);
-		but2= (Button) this.findViewById(R.id.button2);
-		but.setOnClickListener(this);
-		but2.setOnClickListener(this);
+		downBut= (Button) this.findViewById(R.id.DownButton);
+		upBut= (Button) this.findViewById(R.id.UpButton);
+		downBut.setOnClickListener(this);
+		upBut.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
 		sv.getHolder().addCallback(this);
 		
@@ -89,13 +88,11 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		// Here we will control the character movements; Possibly move control to a while pressed instead to get a fluid motion
 		Log.d("Custom", "On Click");
 		switch(v.getId()){
-		case R.id.button2:
-			count-=10;
-			characterImage.setY(count);
+		case R.id.UpButton:
+			characterImage.setY(characterImage.getY()-10);
 			break;
-		case R.id.button1:
-			count+=10;
-			characterImage.setY(count);
+		case R.id.DownButton:
+			characterImage.setY(characterImage.getY()+10);
 			break;
 		}
 	}
@@ -171,7 +168,8 @@ public class MainActivity extends Activity implements OnClickListener, SurfaceHo
 		redBuildingImage.red_building(canvas);
 		blueBuildingImage.blue_building(canvas);
 		yellowBuildingImage.yellow_building(canvas);
-		characterImage.main_character(canvas);
+		if (characterImage.readyRender()== true)
+			characterImage.main_character(canvas);
 	}
 
 

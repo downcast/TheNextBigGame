@@ -2,8 +2,6 @@ package edu.msmith.theflyer;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.Handler;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -15,6 +13,7 @@ public class GameLoop extends Thread implements Runnable{
 	protected Canvas canvas;
 	// This or similar vari we can use to end the game
 	private boolean isRunning= true;
+	private final int FPS= 33;	// We use to control the overall render rate of the game. 33 represents 30 fps
 
 	public GameLoop (SurfaceHolder sh, MainActivity ma){
 		super();
@@ -23,8 +22,6 @@ public class GameLoop extends Thread implements Runnable{
 	}
 
 	public void run(){
-		// For some reason I cant stop this run function
-		//while (!this.isInterrupted()){
 		while (this.isRunning){
 			Log.d("Custom", "GameLoop is running");
 			try {
@@ -44,24 +41,15 @@ public class GameLoop extends Thread implements Runnable{
 					}
 				}
 				// Makes the game wait, I would like to have this handled by a handler if that is possible
-				GameLoop.sleep(1000, 0);
+				GameLoop.sleep(this.FPS, 0);
 				// Use the timing stuff from java to count when the stuff should execute to hopefully be able to stop the thread.
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}//finally{
-			//	intent openStartingPoint = new Intent("");
-			//	startActivity(openStartingPoint);
-			//}
+			}
 		}
 
 	}
-
-	//protected void onStop ()
-	//{
-	//	super.onPause();
-	//	finish();
-	//}
 
 	public synchronized void setIsRunning(boolean bool){
 		this.isRunning= bool;
