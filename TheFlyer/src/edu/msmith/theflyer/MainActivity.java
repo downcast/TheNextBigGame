@@ -1,5 +1,7 @@
 package edu.msmith.theflyer;
 
+import java.util.ArrayList;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -26,7 +28,8 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 	private SurfaceView sv;
 	private GameLoop Loop; // Seperate Thread
 	private Bitmap Cloud, helicopterNews, helicopterMiliary, redBuildingLarge, blueBuildingMid, yellowBuildingSmall, character;  // The helicopter and other Images in raw form change// image//
-	private GameImage cloudImage, helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
+	private Image cloudImage, helicopterNewsImage, helicopterMiliaryImage, redBuildingImage, blueBuildingImage, yellowBuildingImage, characterImage; // The helicopter in object form
+	private ArrayList<Image> gameImageList= new ArrayList<Image>();
 	private int screenheight, screenwidth;
 	private boolean pressedUp= false;
 	private CharacterMovementTask CMT;
@@ -41,13 +44,10 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 		screenheight = getResources().getConfiguration().screenHeightDp;
 		screenwidth = getResources().getConfiguration().screenWidthDp;
 		
-		
 		downBut= (Button) this.findViewById(R.id.DownButton);
 		upBut= (Button) this.findViewById(R.id.UpButton);
 		downBut.setOnTouchListener(this);
 		upBut.setOnTouchListener(this);
-		//downBut.setOnClickListener(this);
-		//upBut.setOnClickListener(this);
 		sv= (SurfaceView) findViewById(R.id.surfaceView1);
 		sv.getHolder().addCallback(this);
 		
@@ -63,16 +63,24 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 		yellowBuildingSmall= BitmapFactory.decodeResource(getResources(), R.drawable.building_yellow_size);
 		character= BitmapFactory.decodeResource(getResources(), R.drawable.game_guy_size25);//70
 
-		cloudImage= new GameImage(Cloud,screenheight,screenwidth);
+		cloudImage= new ObstacleImageClass(Cloud,screenheight,screenwidth, 1000, 250, -1);
 		
-		helicopterNewsImage= new GameImage(helicopterNews,screenheight,screenwidth);
-		helicopterMiliaryImage= new GameImage(helicopterMiliary,screenheight,screenwidth);
-		redBuildingImage= new GameImage(redBuildingLarge,screenheight,screenwidth);
-		blueBuildingImage= new GameImage(blueBuildingMid,screenheight,screenwidth);
-		yellowBuildingImage= new GameImage(yellowBuildingSmall,screenheight,screenwidth);
-		characterImage= new GameImage(character,screenheight,screenwidth);
+		helicopterNewsImage= new ObstacleImageClass(helicopterNews,screenheight,screenwidth, 1000, 250, -3 );
+		helicopterMiliaryImage= new ObstacleImageClass(helicopterMiliary,screenheight,screenwidth,1000, 250, -3);
+		redBuildingImage= new ObstacleImageClass(redBuildingLarge,screenheight,screenwidth, 1000, 250, -2);
+		blueBuildingImage= new ObstacleImageClass(blueBuildingMid,screenheight,screenwidth, 1000, 250, -2);
+		yellowBuildingImage= new ObstacleImageClass(yellowBuildingSmall,screenheight,screenwidth,1000, 250, -2);
+		characterImage= new PlayerImage(character,screenheight,screenwidth, 0, 100);
 
-		Loop= new GameLoop(sv.getHolder(), this);
+		// PLAYER MUST BE THE FIRST ONE ADDED TO THE LIST
+		gameImageList.add(characterImage);
+		gameImageList.add(helicopterMiliaryImage);
+		gameImageList.add(redBuildingImage);
+		gameImageList.add(blueBuildingImage);
+		gameImageList.add(yellowBuildingImage);
+		gameImageList.add(helicopterNewsImage);
+		
+		Loop= new GameLoop(sv.getHolder(), this, gameImageList);
 
 	}
 
@@ -86,6 +94,10 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 		Loop.setIsRunning(false);
 	}
 
+	/** While the user presses a button, an async task is run in a loop until the button is released. 
+	 * <br>
+	 * This provides a smooth up or down motion while the button is pressed
+	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
@@ -111,7 +123,6 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				if(pressedUp == false){
-	                //pressedUp = true;
 	                CMT= new CharacterMovementTask(characterImage, 10);
 	                CMT.execute();
 	            }
@@ -182,7 +193,7 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 			Loop.start();
 		}else{
 			Log.d("Custom", Loop.getState().toString());
-			Loop= new GameLoop(sv.getHolder(), this);
+			Loop= new GameLoop(sv.getHolder(), this, gameImageList);
 			Loop.start();
 		}	
 	}
@@ -193,13 +204,9 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 		Log.d("Custom", "Surface has been demoed");
 	}
 	
-	public void render(Canvas canvas){
-		cloudImage.cloud(canvas);
-		helicopterNewsImage.helicopter_news(canvas);
-		helicopterMiliaryImage.helicopter_military(canvas);
-		redBuildingImage.red_building(canvas);
-		blueBuildingImage.blue_building(canvas);
-		yellowBuildingImage.yellow_building(canvas);
-		characterImage.main_character(canvas);
+	public void render(Canvas canvas, ArrayList<Image> renderList){
+		for (int i=0; i < renderList.size(); i++){
+			renderList.get(i).draw(canvas);
+		}
 	}
 }
