@@ -10,6 +10,7 @@ import android.graphics.Canvas;
  */
 public abstract class Image {
 
+	protected String title= "";
 	/** This is the actually image */
 	protected Bitmap gameImage;
 	protected int screenHeight;
@@ -106,5 +107,38 @@ public abstract class Image {
 	 * @param canvas
 	 */
 	protected abstract void draw(Canvas canvas);
+
+	
+	protected Bitmap getGameImage() {
+		return gameImage;
+	}
+
+	protected void setGameImage(Bitmap gameImage) {
+		this.gameImage = gameImage;
+	}
+
+	protected int getScreenHeight() {
+		return screenHeight;
+	}
+
+	protected void setScreenHeight(int screenHeight) {
+		this.screenHeight = screenHeight;
+	}
+
+	protected int getScreenWidth() {
+		return screenWidth;
+	}
+
+	protected void setScreenWidth(int screenWidth) {
+		this.screenWidth = screenWidth;
+	}
+
+	protected void setImageWidth(int imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	protected void setImageHeight(int imageHeight) {
+		this.imageHeight = imageHeight;
+	}
 	
 }

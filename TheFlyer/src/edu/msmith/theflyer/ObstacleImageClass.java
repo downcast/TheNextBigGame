@@ -12,7 +12,7 @@ public class ObstacleImageClass extends Image {
 
 	/** Holds the value to move the image along the x-axis by. A negative value will move the image to the left.*/
 	protected int xSpeed;
-	
+
 	/** Class constructor.
 	 * 
 	 * @param bitmap The image returned by BitmapFactory.decodeResource
@@ -28,6 +28,16 @@ public class ObstacleImageClass extends Image {
 		this.xSpeed = speed;
 	}
 
+	public ObstacleImageClass(ObstacleImageClass OIC) {
+		super(OIC.getGameImage(), OIC.getScreenHeight(), OIC.getScreenWidth(), 200, 100);
+		this.xSpeed= OIC.getxSpeed();
+	}
+
+	/** Methods generates a new obstacles. */
+	protected ObstacleImageClass getNewObstacle(int code){
+		return new ObstacleImageClass(super.getGameImage(), super.getScreenHeight(), super.getScreenWidth(), 200, 100, this.xSpeed);
+	}
+	
 	protected int getxSpeed() {
 		return xSpeed;
 	}
@@ -35,7 +45,7 @@ public class ObstacleImageClass extends Image {
 	protected void setxSpeed(int xSpeed) {
 		this.xSpeed = xSpeed;
 	}
-
+	
 	/** Draws obstacle to the screen and updates its position for the next draw call with the xSpeed */
 	@Override
 	protected void draw(Canvas canvas){

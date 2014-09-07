@@ -65,11 +65,11 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 
 		cloudImage= new ObstacleImageClass(Cloud,screenheight,screenwidth, 1000, 250, -1);
 		
-		helicopterNewsImage= new ObstacleImageClass(helicopterNews,screenheight,screenwidth, 1000, 250, -3 );
-		helicopterMiliaryImage= new ObstacleImageClass(helicopterMiliary,screenheight,screenwidth,1000, 250, -3);
-		redBuildingImage= new ObstacleImageClass(redBuildingLarge,screenheight,screenwidth, 1000, 250, -2);
-		blueBuildingImage= new ObstacleImageClass(blueBuildingMid,screenheight,screenwidth, 1000, 250, -2);
-		yellowBuildingImage= new ObstacleImageClass(yellowBuildingSmall,screenheight,screenwidth,1000, 250, -2);
+		helicopterNewsImage= new ObstacleImageClass(helicopterNews,screenheight,screenwidth, 200, 50, -3 );
+		helicopterMiliaryImage= new ObstacleImageClass(helicopterMiliary,screenheight,screenwidth,200, 50, -3);
+		redBuildingImage= new ObstacleImageClass(redBuildingLarge,screenheight,screenwidth, 300, 100, -2);
+		blueBuildingImage= new ObstacleImageClass(blueBuildingMid,screenheight,screenwidth, 300, 100, -2);
+		yellowBuildingImage= new ObstacleImageClass(yellowBuildingSmall,screenheight,screenwidth,300, 100, -2);
 		characterImage= new PlayerImage(character,screenheight,screenwidth, 0, 100);
 
 		// PLAYER MUST BE THE FIRST ONE ADDED TO THE LIST
@@ -106,7 +106,6 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				if(pressedUp == false){
-	                //pressedUp = true;
 	                CMT= new CharacterMovementTask(characterImage,-10);
 	                CMT.execute();
 	            }
@@ -159,6 +158,8 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		Log.d("Custom", "Activity Resume");
+		ThemeMusic.start();
+		Loop.setIsRunning(true);
 		super.onResume();
 	}
 
@@ -206,6 +207,7 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 	
 	public void render(Canvas canvas, ArrayList<Image> renderList){
 		for (int i=0; i < renderList.size(); i++){
+			Log.d("Custom", "Render "+ i);
 			renderList.get(i).draw(canvas);
 		}
 	}
