@@ -54,6 +54,7 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 		ThemeMusic= MediaPlayer.create(MainActivity.this, R.raw.thememusic);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ThemeMusic.start();
+		ThemeMusic.setLooping(true);
 		
 		Cloud= BitmapFactory.decodeResource(getResources(), R.drawable.cloud);
 		helicopterNews= BitmapFactory.decodeResource(getResources(), R.drawable.helicopter_news_size75);
@@ -106,7 +107,7 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				if(pressedUp == false){
-	                CMT= new CharacterMovementTask(characterImage,-10);
+	                CMT= new CharacterMovementTask(characterImage,-10, this.screenheight);
 	                CMT.execute();
 	            }
 				break;
@@ -122,7 +123,7 @@ public class MainActivity extends Activity implements OnTouchListener, SurfaceHo
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				if(pressedUp == false){
-	                CMT= new CharacterMovementTask(characterImage, 10);
+	                CMT= new CharacterMovementTask(characterImage, 10, this.screenheight);
 	                CMT.execute();
 	            }
 				break;

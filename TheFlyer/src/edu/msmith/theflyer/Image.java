@@ -101,6 +101,10 @@ public abstract class Image {
 		return (this.getyLocation()+this.getImageHeight());
 	}
 	
+	protected void alignToLowerWall(){
+		this.setyLocation(this.screenHeight-this.getImageHeight());
+	}
+	
 	/** Used to draw objects to the screen.
 	 * <br>
 	 * Each image type will have its own version of the draw method.

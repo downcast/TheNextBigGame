@@ -51,7 +51,7 @@ public class GameLoop extends Thread implements Runnable{
 				synchronized(this.surfaceHolder){
 					if (this.canvas != null){
 						// Removes images that have moved off the screen
-						//renderImageListCheck();
+						renderImageListCheck();
 						// This clears the screen by drawing the background color
 						canvas.drawColor(Color.BLUE);
 						// This ultimately makes its way down to the GameImage obj who actually draws the heli
@@ -74,7 +74,7 @@ public class GameLoop extends Thread implements Runnable{
 	private void renderImageListCheck() {
 		for (int i=0; i < renderImagesList.size(); i++){
 			while (this.renderImagesList.get(i).getxLocation() < 0){
-				this.renderImagesList.get(i).setxLocation(250);
+				this.renderImagesList.remove(i);
 				Log.d("Custom", "ImageCheck reset");
 				i--;
 			}
@@ -109,7 +109,7 @@ public class GameLoop extends Thread implements Runnable{
 			if (this.renderImagesList.get(0).getImageXEdge() <= this.renderImagesList.get(compareIndex).getImageXEdge()){
 				if(this.renderImagesList.get(0).getyLocation() >= this.renderImagesList.get(compareIndex).getyLocation()){
 					if (this.renderImagesList.get(0).getyLocation() <= this.renderImagesList.get(compareIndex).getImageYEdge()){
-						Log.d("Custom", "Collsion detected, removing image from render list");
+						Log.d("Custom", "Player Collsion detected, removing image from render list");
 						this.renderImagesList.remove(compareIndex);
 						//this.renderImagesList.remove(o);
 						return true;
@@ -117,9 +117,20 @@ public class GameLoop extends Thread implements Runnable{
 					}
 				}else if (this.renderImagesList.get(0).getImageYEdge() >= this.renderImagesList.get(compareIndex).getyLocation()){
 					if (this.renderImagesList.get(0).getImageYEdge() <= this.renderImagesList.get(compareIndex).getImageYEdge()){
-						Log.d("Custom", "Collsion detected, removing image from render list");
+						Log.d("Custom", "Player Collsion detected, removing image from render list");
 						this.renderImagesList.remove(compareIndex);
 						//this.renderImagesList.remove(o);
+						return true;
+					}
+				}
+			}
+		}
+		if (this.renderImagesList.get(0).getxLocation() < this.renderImagesList.get(compareIndex).getxLocation()){
+			if (this.renderImagesList.get(compareIndex).getxLocation() < this.renderImagesList.get(0).getImageXEdge()){
+				if (this.renderImagesList.get(0).getyLocation() < this.renderImagesList.get(compareIndex).getyLocation()){
+					if (this.renderImagesList.get(compareIndex).getyLocation() < this.renderImagesList.get(0).getImageYEdge()){
+						Log.d("Custom", "Building Collsion detected, removing image from render list");
+						this.renderImagesList.remove(compareIndex);
 						return true;
 					}
 				}
